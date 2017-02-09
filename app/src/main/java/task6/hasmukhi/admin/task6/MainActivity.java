@@ -618,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
             "]";
     private List<Model> arrayListData = new ArrayList<Model>();
     private ListView lsview;
-    //private CustomListAdapter adapter;
+    private CustomList listadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -629,6 +629,8 @@ public class MainActivity extends AppCompatActivity {
         int userid;
         int id;
         lsview = (ListView)findViewById(R.id.listview);
+        listadapter=new CustomList(this,arrayListData);
+        lsview.setAdapter(listadapter);
         try {
             JSONArray rootArray = new JSONArray(myJSONString);
 
@@ -646,6 +648,8 @@ public class MainActivity extends AppCompatActivity {
                 md.setId(id);
                 md.setTitle(title);
                 md.setBody(body);
+
+                arrayListData.add(md);
             }
         } catch (JSONException e) {
             e.printStackTrace();
